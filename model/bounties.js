@@ -12,6 +12,11 @@ const bountiesSchema = new Schema({
         type: Number,
         required: true
     },
+
+    imgUrl: {
+    type: String,
+    required: true
+    }
 })
 
 //Generate Model
