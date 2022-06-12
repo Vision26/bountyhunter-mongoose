@@ -36,4 +36,30 @@ hunterRoute.delete('/:hunterId', (req, res, next) => {
     })
 })
 
+//Router.get - PArams
+hunterRoute.get('/:hunterId', (req, res, next) => {
+    Bounty.find({_id: req.params.hunterId}, (err, specific) => {
+        if(err){
+            res.status(500)
+            return next(err)
+        }
+        return res.status(200).send(specific)
+    })
+})
+
+//Router.put - Edits
+hunterRoute.put('/:hunterId', (req, res, next) => {
+    Bounty.findOneAndUpdate(
+        {_id: req.params.hunterId},
+        req.body,
+        {new: true},
+        (err, updated) => {
+            if(err){
+                res.status(500)
+                return next(err)
+            }
+            return res.status(201).send(updated)
+        }
+    )
+})
 module.exports = hunterRoute
